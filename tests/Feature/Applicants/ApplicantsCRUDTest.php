@@ -1,25 +1,25 @@
 <?php
 
-test('List all applicants', function () {
+test('Check for list all applicants endpoint', function () {
     $response = $this->get('/api/v1/applicants');
 
     $response->assertStatus(200);
 });
 
-test('create a new applicant', function () {
+test('Check endpoint for create new applicant', function () {
     $response = $this->post('/api/v1/applicants');
 
     $response->assertStatus(201);
 });
 
-test('Retrieve applicant information', function () {
-    $response = $this->post('/api/v1/applicants');
+test('Check endpoint for update existing applicant', function () {
+    $response = $this->get('/api/v1/applicants/1');
 
     $response->assertStatus(201);
 });
 
-test('Update applicant information', function () {
-    $response = $this->patch('/api/v1/applicants1', []);
+test('Check endpoint for delete applicant', function () {
+    $response = $this->patch('/api/v1/applicants/1', []);
 
     $response->assertStatus(200);
 });
