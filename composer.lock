@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "061c8d744ed3ed7e8949ee239ab71e23",
+    "content-hash": "691ffafeeced3724b224a6240d84a3f2",
     "packages": [
         {
             "name": "brick/math",
@@ -7080,73 +7080,6 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2024-07-05T16:01:51+00:00"
-        },
-        {
-            "name": "lukeraymonddowning/pest-plugin-larastrap",
-            "version": "v0.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lukeraymonddowning/pest-plugin-larastrap.git",
-                "reference": "16312c8267f39ccdaad5c0ad6e2f1b260461ea47"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lukeraymonddowning/pest-plugin-larastrap/zipball/16312c8267f39ccdaad5c0ad6e2f1b260461ea47",
-                "reference": "16312c8267f39ccdaad5c0ad6e2f1b260461ea47",
-                "shasum": ""
-            },
-            "require": {
-                "pestphp/pest-plugin": "^2.0",
-                "php": "^8.1 || ^8.2"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.15",
-                "laravel/framework": "^10.0",
-                "orchestra/testbench": "^8.0",
-                "pestphp/pest": "^2.0",
-                "pestphp/pest-dev-tools": "^2.0"
-            },
-            "type": "library",
-            "extra": {
-                "pest": {
-                    "plugins": [
-                        "Lukeraymonddowning\\Larastrap\\Plugin"
-                    ]
-                },
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lukeraymonddowning\\Larastrap\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "My awesome plugin",
-            "keywords": [
-                "framework",
-                "pest",
-                "php",
-                "plugin",
-                "test",
-                "testing",
-                "unit"
-            ],
-            "support": {
-                "issues": "https://github.com/lukeraymonddowning/pest-plugin-larastrap/issues",
-                "source": "https://github.com/lukeraymonddowning/pest-plugin-larastrap/tree/v0.3.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/lukeraymonddowning",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-03-29T08:42:34+00:00"
         },
         {
             "name": "mockery/mockery",
