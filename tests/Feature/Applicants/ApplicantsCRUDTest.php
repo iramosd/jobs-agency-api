@@ -9,7 +9,7 @@ it('Check for list all applicants endpoint', function () {
 });
 
 it('Check endpoint for create new applicant', function () {
-    $password = fake()->password(8, 12);
+    $password = fake()->password(8, 12) . '@123Password';
 
     $this->post('/api/v1/applicants',
         [
