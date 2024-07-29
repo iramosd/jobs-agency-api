@@ -10,6 +10,7 @@ it('create a new applicant', function () {
         'first_name' => fake()->firstName(),
         'last_name' => fake()->lastName(),
         'email' => fake()->unique()->email(),
+        'password' => fake()->password(8, 12),
         'phone' => fake()->phoneNumber(),
         'address' => fake()->address(),
         'city' => fake()->city(),

@@ -1,32 +1,66 @@
 <?php
 
-test('Check for list all applicants endpoint', function () {
-    $response = $this->get('/api/v1/applicants');
+use App\Enum\ApplicantStateEnum;
+use App\Models\Applicant;
+use Illuminate\Support\Facades\Hash;
 
-    $response->assertStatus(200);
+it('Check for list all applicants endpoint', function () {
+    $this->get('/api/v1/applicants')
+        ->assertOk();
 });
 
-test('Check endpoint for create new applicant', function () {
-    $response = $this->post('/api/v1/applicants');
+it('Check endpoint for create new applicant', function () {
+    $password = fake()->password(8, 12);
 
-    $response->assertStatus(201);
+    $this->post('/api/v1/applicants',
+        [
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'email' => fake()->unique()->safeEmail(),
+            'password' => $password,
+            'password_confirmation' => $password,
+        ])->assertStatus(201);
 });
 
-test('Check endpoint for update existing applicant', function () {
-    $response = $this->get('/api/v1/applicants/1');
-
-    $response->assertStatus(201);
+it('Check endpoint for failed on create new applicant', function () {
+    $this->post('/api/v1/applicants',
+        [
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'email' => fake()->email(),
+            'password' => fake()->password(5),
+            'password_confirmation' => fake()->password(8, 12),
+        ])->assertStatus(302);
 });
 
-test('Check endpoint for delete applicant', function () {
-    $response = $this->patch('/api/v1/applicants/1', []);
-
-    $response->assertStatus(200);
+it('Check endpoint for update applicant', function () {
+    $this->patch('/api/v1/applicants/'.Applicant::factory()->create()->id, [
+        'phone' => fake()->phoneNumber(),
+        'address' => fake()->address(),
+        'city' => fake()->city(),
+    ])->assertOk();
 });
 
-test('Delete an applicant', function () {
-    $response = $this->delete('/api/v1/applicants/1', []);
+it('Check endpoint for show applicant', function () {
 
-    $response->assertStatus(204);
+    $this->get('/api/v1/applicants/'.Applicant::factory()->create()->id)
+    ->assertOk();
 });
+
+it('Check endpoint for not found applicant', function () {
+
+    $this->get('/api/v1/applicants/1555151515151515151515151515')
+        ->assertStatus(404);
+});
+
+it('Check endpoint for delete applicant', function () {
+    $this->delete('/api/v1/applicants/'.Applicant::factory()->create()->id)
+        ->assertStatus(204);
+});
+
+it('Check endpoint for failed delete applicant', function () {
+    $this->delete('/api/v1/applicants/1555151515151515151515151515')
+        ->assertStatus(404);
+});
+
 
