@@ -71,5 +71,3 @@ it('Check endpoint for failed delete applicant', function () {
     $this->delete('/api/v1/applicants/1555151515151515151515151515')
         ->assertStatus(404);
 });
-
-
