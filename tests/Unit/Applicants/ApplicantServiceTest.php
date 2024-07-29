@@ -1,34 +1,48 @@
 <?php
 
 use App\Services\ApplicantService;
+use Illuminate\Database\Eloquent\Collection;
+use App\Models\Applicant;
 
-test('List all applicants', function () {
 
-    $response = (new ApplicantService())->list();
+it('create a new applicant', function () {
+    $response = (new ApplicantService())->create([
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'email' => fake()->unique()->email(),
+        'phone' => fake()->phoneNumber(),
+        'address' => fake()->address(),
+        'city' => fake()->city(),
+        'state' => fake()->state(),
+        'country' => fake()->country(),
+        'status' => fake()->randomElement(['active', 'inactive']),
+    ]);
 
-    $this->assertTrue(false);
+    $this->assertTrue($response instanceof Applicant);
 });
 
-test('create a new applicant', function () {
-    $response = (new ApplicantService())->create();
+it('Retrieve applicant information', function () {
 
-    $this->assertTrue(false);
+    $response = (new ApplicantService())->show(Applicant::factory()->create());
+
+    $this->assertTrue($response instanceof Applicant);
 });
 
-test('Retrieve applicant information', function () {
-    $response = (new ApplicantService())->show();
+it('Update applicant information', function () {
+    $response = (new ApplicantService())->update(
+        Applicant::factory()->create(),
+        [
+            'first_name' => fake()->firstName(),
+            'phone' => fake()->phoneNumber(),
+            'status' => 'active',
+        ]
+    );
 
-    $this->assertTrue(false);
+    $this->assertTrue($response);
 });
 
-test('Update applicant information', function () {
-    $response = (new ApplicantService())->update();
+it('Delete an applicant', function () {
+    $response = (new ApplicantService())->delete(Applicant::factory()->create());
 
-    $this->assertTrue(false);
-});
-
-test('Delete an applicant', function () {
-    $response = (new ApplicantService())->delete();
-
-    $this->assertTrue(false);
+    $this->assertTrue($response);
 });
