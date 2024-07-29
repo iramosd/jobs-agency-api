@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
 
-        if(config('app.env') === 'local' || config('app.env') === 'staging') {
+        if(config('app.env') === 'local' || config('app.env') === 'testing') {
             $this->call([
                 ApplicantSeeder::class,
             ]);

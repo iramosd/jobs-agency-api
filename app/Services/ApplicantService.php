@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Contracts\ApplicantServiceInterface;
 use App\Models\Applicant;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class ApplicantService implements ApplicantServiceInterface
 {
@@ -16,6 +17,8 @@ class ApplicantService implements ApplicantServiceInterface
 
     public function create(array $data): Applicant
     {
+        $data['password'] = Hash::make($data['password']);
+
         return Applicant::create($data);
     }
 

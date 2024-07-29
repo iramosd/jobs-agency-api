@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Applicant;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class ApplicantRequest extends FormRequest
@@ -26,14 +27,46 @@ class ApplicantRequest extends FormRequest
         return [
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', 'unique:'.Applicant::class],
-            'password' => ['required', 'confirmed', Password::defaults()],
-            'password_confirmation' => ['required', Password::defaults()],
             'address' => ['nullable', 'string'],
             'city' => ['nullable', 'string'],
             'state' => ['nullable', 'string'],
             'country' => ['nullable', 'string'],
             'status' => ['nullable', 'string'],
+        ] + ($this->isMethod('post') ? $this->store() : $this->update());
+    }
+
+    public function store()
+    {
+        return[
+                'email' => ['required', 'string', 'email', 'unique:'.Applicant::class],
+                'password' => ['required', 'confirmed',
+                    Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()],
+                'password_confirmation' => ['required',
+                    Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()
+                ],
         ];
+    }
+
+    public function update()
+    {
+        $applicant = $this->route('applicant');
+
+        return[
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    Rule::unique('applicants')->ignore($applicant)],
+            ];
     }
 }

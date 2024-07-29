@@ -2,7 +2,6 @@
 
 use App\Enum\ApplicantStateEnum;
 use App\Models\Applicant;
-use Illuminate\Support\Facades\Hash;
 
 it('Check for list all applicants endpoint', function () {
     $this->get('/api/v1/applicants')
@@ -35,20 +34,30 @@ it('Check endpoint for failed on create new applicant', function () {
 
 it('Check endpoint for update applicant', function () {
     $this->patch('/api/v1/applicants/'.Applicant::factory()->create()->id, [
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'email' => fake()->email(),
         'phone' => fake()->phoneNumber(),
         'address' => fake()->address(),
         'city' => fake()->city(),
     ])->assertOk();
 });
 
-it('Check endpoint for show applicant', function () {
+it('Check endpoint for failed on update applicant', function () {
+    $this->patch('/api/v1/applicants/'.Applicant::factory()->create()->id, [
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'phone' => fake()->phoneNumber(),
+        'address' => fake()->address(),
+    ])->assertStatus(302);
+});
 
+it('Check endpoint for show applicant', function () {
     $this->get('/api/v1/applicants/'.Applicant::factory()->create()->id)
     ->assertOk();
 });
 
 it('Check endpoint for not found applicant', function () {
-
     $this->get('/api/v1/applicants/1555151515151515151515151515')
         ->assertStatus(404);
 });

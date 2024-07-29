@@ -18,6 +18,7 @@ class Applicant extends Authenticatable implements HasMedia
         'first_name',
         'last_name',
         'email',
+        'password',
         'phone',
         'address',
         'city',
