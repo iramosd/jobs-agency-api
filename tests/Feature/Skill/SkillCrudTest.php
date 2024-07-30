@@ -13,7 +13,6 @@ it('Check endpoint for create new skill', function () {
     $this->actingAs(User::factory()->create())->post('/api/v1/skills',
         [
             'name' => 'Tech Support L2',
-            'level' => SkillLevelEnum::INTERMEDIATE->value,
         ])->assertStatus(201);
 });
 
@@ -27,14 +26,12 @@ it('Check endpoint for failed on create new skill', function () {
 it('Check endpoint for update skill', function () {
     $this->actingAs(User::factory()->create())->patch('/api/v1/skills/'.Skill::factory()->create()->id, [
         'name' => 'Angular',
-        'level' => SkillLevelEnum::ADVANCED->value,
     ])->assertOk();
 });
 
 it('Check endpoint for failed on update skill', function () {
     $this->actingAs(User::factory()->create())->patch('/api/v1/skills/'.Skill::factory()->create()->id, [
         'name' => null,
-        'level' => null,
     ])->assertStatus(302);
 });
 

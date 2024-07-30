@@ -7,7 +7,6 @@ use App\Models\Skill;
 it('create a new skill', function () {
     $response = (new SkillService())->create([
         'name' => 'Statical Analysis',
-        'level' => SkillLevelEnum::INTERMEDIATE->value,
     ]);
 
     $this->assertTrue($response instanceof Skill);
@@ -25,7 +24,6 @@ it('update skill information', function () {
         Skill::factory()->create(),
         [
             'name' => 'IT Management',
-            'level' => SkillLevelEnum::EXPERT->value,
         ]
     );
 
