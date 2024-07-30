@@ -2,16 +2,17 @@
 
 use App\Enum\ApplicantStateEnum;
 use App\Models\Applicant;
+use App\Models\User;
 
 it('Check for list all applicants endpoint', function () {
-    $this->get('/api/v1/applicants')
+    $this->actingAs(User::factory()->create())->get('/api/v1/applicants')
         ->assertOk();
 });
 
 it('Check endpoint for create new applicant', function () {
     $password = fake()->password(8, 12) . '@123Password';
 
-    $this->post('/api/v1/applicants',
+    $this->actingAs(User::factory()->create())->post('/api/v1/applicants',
         [
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
@@ -22,7 +23,7 @@ it('Check endpoint for create new applicant', function () {
 });
 
 it('Check endpoint for failed on create new applicant', function () {
-    $this->post('/api/v1/applicants',
+    $this->actingAs(User::factory()->create())->post('/api/v1/applicants',
         [
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
@@ -33,7 +34,7 @@ it('Check endpoint for failed on create new applicant', function () {
 });
 
 it('Check endpoint for update applicant', function () {
-    $this->patch('/api/v1/applicants/'.Applicant::factory()->create()->id, [
+    $this->actingAs(User::factory()->create())->patch('/api/v1/applicants/'.Applicant::factory()->create()->id, [
         'first_name' => fake()->firstName(),
         'last_name' => fake()->lastName(),
         'email' => fake()->email(),
@@ -44,7 +45,7 @@ it('Check endpoint for update applicant', function () {
 });
 
 it('Check endpoint for failed on update applicant', function () {
-    $this->patch('/api/v1/applicants/'.Applicant::factory()->create()->id, [
+    $this->actingAs(User::factory()->create())->patch('/api/v1/applicants/'.Applicant::factory()->create()->id, [
         'first_name' => fake()->firstName(),
         'last_name' => fake()->lastName(),
         'phone' => fake()->phoneNumber(),
@@ -53,21 +54,21 @@ it('Check endpoint for failed on update applicant', function () {
 });
 
 it('Check endpoint for show applicant', function () {
-    $this->get('/api/v1/applicants/'.Applicant::factory()->create()->id)
+    $this->actingAs(User::factory()->create())->get('/api/v1/applicants/'.Applicant::factory()->create()->id)
     ->assertOk();
 });
 
 it('Check endpoint for not found applicant', function () {
-    $this->get('/api/v1/applicants/1555151515151515151515151515')
+    $this->actingAs(User::factory()->create())->get('/api/v1/applicants/1555151515151515151515151515')
         ->assertStatus(404);
 });
 
 it('Check endpoint for delete applicant', function () {
-    $this->delete('/api/v1/applicants/'.Applicant::factory()->create()->id)
+    $this->actingAs(User::factory()->create())->delete('/api/v1/applicants/'.Applicant::factory()->create()->id)
         ->assertStatus(204);
 });
 
 it('Check endpoint for failed delete applicant', function () {
-    $this->delete('/api/v1/applicants/1555151515151515151515151515')
+    $this->actingAs(User::factory()->create())->delete('/api/v1/applicants/1555151515151515151515151515')
         ->assertStatus(404);
 });
