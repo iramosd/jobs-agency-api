@@ -4,15 +4,15 @@ namespace App\Services;
 
 use App\Contracts\ApplicantServiceInterface;
 use App\Models\Applicant;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Hash;
 
 class ApplicantService implements ApplicantServiceInterface
 {
 
-    public function list(array $request = null): Collection
+    public function list(array $request = null): LengthAwarePaginator
     {
-        return Applicant::all();
+        return Applicant::paginate();
     }
 
     public function create(array $data): Applicant
