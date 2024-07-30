@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         if(config('app.env') === 'local' || config('app.env') === 'testing') {
             $this->call([
                 ApplicantSeeder::class,
+                SkillSeeder::class,
             ]);
         }
     }
