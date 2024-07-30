@@ -9,7 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class SkillService implements SkillServiceInterface
 {
 
-    public function list(array $request): LengthAwarePaginator
+    public function list(array $request  = null): LengthAwarePaginator
     {
         return Skill::paginate();
     }

@@ -2,64 +2,63 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Contracts\SkillServiceInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SkillRequest;
+use App\Http\Resources\SkillResource;
+use App\Models\Skill;
+use App\services\SkillService;
 use Illuminate\Http\Request;
 
 class SkillController extends Controller
 {
+    private SkillServiceInterface $service;
+
+    public function __construct()
+    {
+        $this->service = new SkillService();
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return SkillResource::collection($this->service->list());
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SkillRequest $request)
     {
-        //
+        return $this->service->create($request->validated());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Skill $skill)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        return new SkillResource($this->service->show($skill));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SkillRequest $request, Skill $skill)
     {
-        //
+        $this->service->update($skill, $request->validated());
+
+        return new SkillResource($skill);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Skill $skill)
     {
-        //
+        $this->service->delete($skill);
+
+        return response()->noContent();
     }
 }

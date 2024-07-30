@@ -41,7 +41,7 @@ class ApplicantController extends Controller
         return response()->noContent();
     }
 
-    public function update(Applicant $applicant, ApplicantRequest $request)
+    public function update(ApplicantRequest $request, Applicant $applicant)
     {
         $this->service->update($applicant, $request->validated());
 
