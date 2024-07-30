@@ -47,3 +47,9 @@ it('Delete an applicant', function () {
 
     $this->assertTrue($response);
 });
+
+it('attach skill to applicant', function () {
+    $response = (new ApplicantService())->addSkill(Applicant::factory()->create(), Skill::factory()->create());
+
+    $this->assertTrue($response);
+});
