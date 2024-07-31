@@ -1,7 +1,8 @@
 <?php
 
-use App\Enum\ApplicantStateEnum;
+use App\Enum\SkillLevelEnum;
 use App\Models\Applicant;
+use App\Models\Skill;
 use App\Models\User;
 
 it('Check for list all applicants endpoint', function () {
@@ -76,7 +77,15 @@ it('Check endpoint for failed delete applicant', function () {
 it('add skill to applicant', function () {
     $this->actingAs(User::factory()->create())->post(
         '/api/v1/applicants/'.Applicant::factory()->create()->id.'/skills/'.Skill::factory()->create()->id,
+        [ 'level' => SkillLevelEnum::BEGINNER->value ],
     )->assertStatus(201);
+});
+
+it('fail when add skill to applicant with wrong level', function () {
+    $this->actingAs(User::factory()->create())->post(
+        '/api/v1/applicants/'.Applicant::factory()->create()->id.'/skills/'.Skill::factory()->create()->id,
+        ['level' => 'No level'],
+    )->assertStatus(302);
 });
 
 it('remove skill to applicant', function () {
