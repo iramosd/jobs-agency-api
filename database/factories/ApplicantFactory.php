@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enum\ApplicantStateEnum;
+use App\Enum\ApplicantStatusEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,7 +28,7 @@ class ApplicantFactory extends Factory
             'city' => fake()->city(),
             'state' => fake()->state(),
             'country' => fake()->country(),
-            'status' => fake()->randomElement([ApplicantStateEnum::ACTIVE->value, ApplicantStateEnum::INACTIVE->value]),
+            'status' => fake()->randomElement([ApplicantStatusEnum::ACTIVE->value, ApplicantStatusEnum::INACTIVE->value]),
         ];
     }
 }

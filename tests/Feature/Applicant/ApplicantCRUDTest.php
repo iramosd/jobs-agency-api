@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\ApplicantStatusEnum;
 use App\Enum\SkillLevelEnum;
 use App\Models\Applicant;
 use App\Models\Skill;
@@ -20,10 +21,13 @@ it('Check endpoint for create new applicant', function () {
             'email' => fake()->unique()->safeEmail(),
             'password' => $password,
             'password_confirmation' => $password,
+            'status' => ApplicantStatusEnum::INACTIVE->value
         ])->assertStatus(201);
 });
 
 it('Check endpoint for failed on create new applicant', function () {
+    $password = fake()->password(8, 12) . '@123Password';
+
     $this->actingAs(User::factory()->create())->post('/api/v1/applicants',
         [
             'first_name' => fake()->firstName(),
@@ -31,6 +35,16 @@ it('Check endpoint for failed on create new applicant', function () {
             'email' => fake()->email(),
             'password' => fake()->password(5),
             'password_confirmation' => fake()->password(8, 12),
+        ])->assertStatus(302);
+
+    $this->actingAs(User::factory()->create())->post('/api/v1/applicants',
+        [
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'email' => fake()->email(),
+            'password' => $password,
+            'password_confirmation' => $password,
+            'status' => 'unknown'
         ])->assertStatus(302);
 });
 
@@ -74,10 +88,14 @@ it('Check endpoint for failed delete applicant', function () {
         ->assertStatus(404);
 });
 
-it('add skill to applicant', function () {
+it('Check endpoint for add skill to applicant', function () {
     $this->actingAs(User::factory()->create())->post(
         '/api/v1/applicants/'.Applicant::factory()->create()->id.'/skills/'.Skill::factory()->create()->id,
         [ 'level' => SkillLevelEnum::BEGINNER->value ],
+    )->assertStatus(201);
+
+    $this->actingAs(User::factory()->create())->post(
+        '/api/v1/applicants/'.Applicant::factory()->create()->id.'/skills/'.Skill::factory()->create()->id
     )->assertStatus(201);
 });
 

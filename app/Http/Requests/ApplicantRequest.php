@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enum\ApplicantStatusEnum;
 use App\Models\Applicant;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -31,7 +32,7 @@ class ApplicantRequest extends FormRequest
             'city' => ['nullable', 'string'],
             'state' => ['nullable', 'string'],
             'country' => ['nullable', 'string'],
-            'status' => ['nullable', 'string'],
+            'status' => ['nullable', Rule::enum(ApplicantStatusEnum::class)],
         ] + ($this->isMethod('post') ? $this->store() : $this->update());
     }
 
@@ -66,7 +67,8 @@ class ApplicantRequest extends FormRequest
                     'required',
                     'string',
                     'email',
-                    Rule::unique('applicants')->ignore($applicant)],
+                    Rule::unique('applicants')->ignore($applicant)
+                ],
             ];
     }
 }
