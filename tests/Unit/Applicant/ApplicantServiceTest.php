@@ -1,5 +1,8 @@
 <?php
 
+use App\Enum\SkillLevelEnum;
+use App\Models\ApplicantSkill;
+use App\Models\Skill;
 use App\Services\ApplicantService;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Applicant;
@@ -48,8 +51,24 @@ it('Delete an applicant', function () {
     $this->assertTrue($response);
 });
 
-it('attach skill to applicant', function () {
+it('add a skill to applicant', function () {
+    $response = (new ApplicantService())->addSkill(Applicant::factory()->create(), Skill::factory()->create(), SkillLevelEnum::BEGINNER);
+
+    $this->assertTrue($response instanceof ApplicantSkill);
+});
+
+it('add a skill to applicant without level', function () {
     $response = (new ApplicantService())->addSkill(Applicant::factory()->create(), Skill::factory()->create());
+
+    $this->assertNull($response->level);
+});
+
+it('remove a skill to applicant', function () {
+    $applicant = Applicant::factory()->create();
+    $skill = Skill::factory()->create();
+
+    (new ApplicantService())->addSkill($applicant, $skill);
+    $response = (new ApplicantService())->removeSkill($applicant, $skill);
 
     $this->assertTrue($response);
 });

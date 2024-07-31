@@ -72,3 +72,21 @@ it('Check endpoint for failed delete applicant', function () {
     $this->actingAs(User::factory()->create())->delete('/api/v1/applicants/1555151515151515151515151515')
         ->assertStatus(404);
 });
+
+it('add skill to applicant', function () {
+    $this->actingAs(User::factory()->create())->post(
+        '/api/v1/applicants/'.Applicant::factory()->create()->id.'/skills/'.Skill::factory()->create()->id,
+    )->assertStatus(201);
+});
+
+it('remove skill to applicant', function () {
+    $applicant = Applicant::factory()->create();
+    $skill = Skill::factory()->create();
+    $this->actingAs(User::factory()->create())->post(
+        '/api/v1/applicants/'.$applicant->id.'/skills/'.$skill->id,
+    )->assertStatus(201);
+
+    $this->actingAs(User::factory()->create())->delete(
+        '/api/v1/applicants/'.$applicant->id.'/skills/'.$skill->id,
+    )->assertStatus(204);
+});
