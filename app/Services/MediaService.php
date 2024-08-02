@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Contracts\MediaServiceInterface;
-use App\Contracts\Skill;
 use App\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
