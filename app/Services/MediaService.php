@@ -20,4 +20,9 @@ class MediaService implements MediaServiceInterface
     {
        return $media->delete();
     }
+
+    public function show(Media $media): Media
+    {
+        return $media;
+    }
 }

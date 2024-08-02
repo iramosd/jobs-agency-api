@@ -5,7 +5,7 @@ use App\Models\Media;
 use App\Services\MediaService;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
 
-it('can create and delete media', function () {
+it('can create, show and delete media', function () {
     $fullPath = storage_path('/app/public/testing-files/test-file.pdf');
 
     touch($fullPath);
@@ -19,6 +19,10 @@ it('can create and delete media', function () {
     $this->assertTrue($response instanceof BaseMedia);
 
     $media = Media::find($response->id);
+
+    $this->assertTrue(
+        (new MediaService())->show($media) instanceof Media);
+
     $this->assertTrue(
         (new MediaService())->delete($media)
     );

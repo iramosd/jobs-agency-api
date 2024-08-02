@@ -21,10 +21,6 @@ class MediaController extends Controller
     {
         $this->service = new MediaService();
     }
-    public function index()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -32,24 +28,21 @@ class MediaController extends Controller
     public function store(MediaRequest $request)
     {
         $validated = $request->validated();
+
         return new MediaResource($this->service->create(auth()->user(), $validated['media'], $validated['collection_name']));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Media $media)
     {
-        //
+        return new MediaResource($this->service->show($media));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

@@ -11,4 +11,5 @@ interface MediaServiceInterface
 {
     public function create(HasMedia $user, string | UploadedFile $file, string $collectionName): BaseMedia;
     public function delete(Media $media): ?bool;
+    public function show(Media $media): Media;
 }
