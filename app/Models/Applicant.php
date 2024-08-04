@@ -32,6 +32,31 @@ class Applicant extends Authenticatable implements HasMedia
        'status' => ApplicantStatusEnum::class
     ];
 
+    protected $appends = ['full_name'];
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('cv')
+            ->acceptsMimeTypes([
+                'application/pdf',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            ])
+            ->singleFile();
+        $this
+            ->addMediaCollection('profile-photo')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/heic'])
+            ->useFallbackUrl('/images/anonymous-user.png')
+            ->useFallbackPath(public_path('/images/anonymous-user.png'))
+            ->singleFile();;
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+
     public function skills(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class, ApplicantSkill::class);
