@@ -4,16 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\permission\Traits\HasRoles;
-
-
+use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements HasMedia
 {
-    use HasFactory, HasRoles, InteractsWithMedia, Notifiable;
+    use HasFactory, HasRoles, InteractsWithMedia, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
