@@ -3,16 +3,17 @@
 use App\Models\Applicant;
 use App\Models\Media;
 use App\Services\MediaService;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
 
 it('can create, show and delete media', function () {
-    $fullPath = storage_path('/app/public/testing-files/test-file.pdf');
 
-    touch($fullPath);
+    Storage::fake('testing');
 
     $response = (new MediaService())->create(
     Applicant::factory()->create(),
-    $fullPath,
+    UploadedFile::fake()->create('test-cv.pdf', 2048, 'application/pdf'),
     'collection_name'
     );
 
