@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            RoleSeeder::class
         ]);
 
         if(config('app.env') === 'local' || config('app.env') === 'testing') {
