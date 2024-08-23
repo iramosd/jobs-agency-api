@@ -2,34 +2,44 @@
 
 use App\Models\Role;
 use App\Services\RoleService;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 it('create a new role', function () {
-    $role = RoleService::create([
-        'name' => 'test',
+    $response = (new RoleService)->create([
+        'name' => 'testRole',
         'guard_name' => 'web',
     ]);
 
-    $this->assertTrue($role instanceof Role);
+    $this->assertTrue($response instanceof Role);
 });
 
 it('retrieve role', function () {
 
-    $role = (new RoleService())->show(Role::factory()->create());
+    $response = (new RoleService())->show(Role::factory()->create());
 
-    $this->assertTrue($role instanceof Role);
+    $this->assertTrue($response instanceof Role);
 });
 
 it('update a role', function () {
-    $role = Role::factory()->create();
-    $this->assertTrue($role instanceof Role);
+    $response = (new RoleService())->update(
+        Role::factory()->create(),
+        [
+            'name' => 'updatedNameRole',
+            'guard_name' => 'web',
+        ]
+    );
+
+    $this->assertTrue($response);
 });
 
 it('delete a role', function () {
-    $role = Role::factory()->create();
-    $this->assertTrue($role instanceof Role);
+    $response = (new RoleService())->delete(Role::factory()->create());
+
+    $this->assertTrue($response);
 });
 
 it('list roles', function () {
-    $role = Role::factory()->create();
-    $this->assertTrue($role instanceof Role);
+    $response = (new RoleService())->list();
+
+    $this->assertTrue($response instanceof LengthAwarePaginator);
 });
