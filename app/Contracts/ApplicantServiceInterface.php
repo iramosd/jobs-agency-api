@@ -11,7 +11,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface ApplicantServiceInterface
 {
 
-    public function list(array $request): LengthAwarePaginator;
+    public function list(array $request = null): LengthAwarePaginator;
     public function create(array $data): Applicant;
     public function update(Applicant $applicant, array $data): bool;
     public function delete(Applicant $applicant): bool;
