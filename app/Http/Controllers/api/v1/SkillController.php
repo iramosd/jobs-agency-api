@@ -7,8 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SkillRequest;
 use App\Http\Resources\SkillResource;
 use App\Models\Skill;
-use App\services\SkillService;
-use Illuminate\Http\Request;
+use App\Services\SkillService;
 
 class SkillController extends Controller
 {
