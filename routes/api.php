@@ -17,10 +17,6 @@ Route::middleware(['auth:sanctum'])->prefix('/v1')->as('api.')->group(function (
     route::post('/applicants/{applicant}/skills/{skill}', [ApplicantSkillController::class, 'store'])->name('applicants.skills.store');
     route::delete('/applicants/{applicant}/skills/{skill}', [ApplicantSkillController::class, 'destroy'])->name('applicants.skills.destroy');
 
-    route::prefix('/patient')->as('patient')->group(function (){
-        //route::apiResource()->only(['show', 'store', '']);
-    });
-
     // TODO simplify media routes with apiResource
     // route::apiResource('/media/{media}', MediaController::class)->only(['show', 'store', 'destroy']);
     route::get('/media/{media}', [MediaController::class, 'show'])->name('media.show');
