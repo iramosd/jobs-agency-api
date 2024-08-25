@@ -11,26 +11,30 @@ it('check to list all roles', function () {
 it('check endpoint for create new role', function () {
     $this->actingAs(User::factory()->create())->post('/api/v1/roles',
         [
-            'name' => 'Tech Support L2',
+            'name' => 'Test Role',
+            'guard_name' => 'web'
         ])->assertStatus(201);
 });
 
 it('check endpoint for failed on create new role', function () {
     $this->actingAs(User::factory()->create())->post('/api/v1/roles',
         [
-            'name' => null,
+            'name' => 'Test Role',
+            'guard_name' => 'any'
         ])->assertStatus(302);
 });
 
 it('check endpoint for update role', function () {
     $this->actingAs(User::factory()->create())->patch('/api/v1/roles/' . Role::factory()->create()->id, [
         'name' => 'New Role Name',
+        'guard_name' => 'api',
     ])->assertOk();
 });
 
 it('check endpoint for failed on update role', function () {
     $this->actingAs(User::factory()->create())->patch('/api/v1/roles/' . Role::factory()->create()->id, [
         'name' => null,
+        'guard_name' => 'none'
     ])->assertStatus(302);
 });
 

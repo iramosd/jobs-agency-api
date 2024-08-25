@@ -30,7 +30,7 @@ class SkillController extends Controller
      */
     public function store(SkillRequest $request)
     {
-        return $this->service->create($request->validated());
+        return new skillResource($this->service->create($request->validated()));
     }
 
     /**

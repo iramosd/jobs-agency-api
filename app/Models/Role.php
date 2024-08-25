@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Permission\Models\Role as SpatieRole;
+use Spatie\Permission\Models\Role as BaseRole;
 
-class Role extends SpatieRole
+class Role extends BaseRole
 {
     use HasFactory;
 
