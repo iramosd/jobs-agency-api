@@ -21,8 +21,7 @@ Route::middleware(['auth:sanctum'])->prefix('/v1')->as('api.')->group(function (
         //route::apiResource()->only(['show', 'store', '']);
     });
 
-    //TODO Need fixed retrieve wrong delete route:
-    // DELETE          api/v1/media/{medium}
+    // TODO simplify media routes with apiResource
     // route::apiResource('/media/{media}', MediaController::class)->only(['show', 'store', 'destroy']);
     route::get('/media/{media}', [MediaController::class, 'show'])->name('media.show');
     route::post('/media', [MediaController::class, 'store'])->name('media.store');
