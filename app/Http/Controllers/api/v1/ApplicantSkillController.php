@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Contracts\ApplicantServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApplicantSkillRequest;
 use App\Models\Applicant;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ApplicantSkillController extends Controller
 {
-    private ApplicantService $service;
+    private ApplicantServiceInterface $service;
     public function __construct()
     {
         $this->service = new ApplicantService();

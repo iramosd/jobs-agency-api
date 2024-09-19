@@ -52,6 +52,6 @@ class ApplicantService implements ApplicantServiceInterface
 
     public function removeSkill(Applicant $applicant, Skill $skill): bool
     {
-        return $applicant->skills()->detach($skill);
+        return (boolean)$applicant->skills()->detach($skill);
     }
 }
