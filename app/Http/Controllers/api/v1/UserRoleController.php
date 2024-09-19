@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Contracts\UserServiceInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class UserRoleController extends Controller
     }
     public function store(User $user, BaseRole $role)
     {
-        return $this->service->addRole($user, $role);
+        return new UserResource($this->service->addRole($user, $role));
     }
 
     public function destroy(User $user, BaseRole $role)
