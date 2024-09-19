@@ -9,12 +9,12 @@ use Spatie\Permission\Models\Role as BaseRole;
 class UserService implements UserServiceInterface
 {
 
-    public function addRole(User $user, BaseRole | array $roles): BaseRole
+    public function addRole(User $user, BaseRole | array $roles): User
     {
         return $user->assignRole($roles);
     }
 
-    public function removeRole(User $user, BaseRole $role): BaseRole
+    public function removeRole(User $user, BaseRole $role): User
     {
         return $user->removeRole($role);
     }
