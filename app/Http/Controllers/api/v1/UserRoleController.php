@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Contracts\UserServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role as BaseRole;
 class UserRoleController extends Controller
