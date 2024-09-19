@@ -24,6 +24,8 @@ class UserRoleController extends Controller
 
     public function destroy(User $user, BaseRole $role)
     {
-        return $this->service->removeRole($user, $role);
+        $this->service->removeRole($user, $role);
+
+        return response()->noContent();
     }
 }
