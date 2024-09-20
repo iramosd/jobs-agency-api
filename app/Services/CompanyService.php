@@ -11,26 +11,26 @@ class CompanyService implements CompanyServiceInterface
 
     public function list(array $request = null): LengthAwarePaginator
     {
-        // TODO: Implement list() method.
+        return Company::paginate();
     }
 
     public function create(array $data): Company
     {
-        // TODO: Implement create() method.
+        return Company::create($data);
     }
 
     public function update(Company $company, array $data): bool
     {
-        // TODO: Implement update() method.
+       return $company->update($data);
     }
 
     public function delete(Company $company): bool
     {
-        // TODO: Implement delete() method.
+        return $company->delete();
     }
 
     public function show(Company $company): ?Company
     {
-        // TODO: Implement show() method.
+        return $company;
     }
 }
