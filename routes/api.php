@@ -18,12 +18,7 @@ Route::middleware(['auth:sanctum'])->prefix('/v1')->as('api.')->group(function (
     Route::post('/applicants/{applicant}/skills/{skill}', [ApplicantSkillController::class, 'store'])->name('applicants.skills.store');
     Route::delete('/applicants/{applicant}/skills/{skill}', [ApplicantSkillController::class, 'destroy'])->name('applicants.skills.destroy');
 
-    // TODO simplify media routes with apiResource
-    // Route::apiResource('/media/{media}', MediaController::class)->only(['show', 'store', 'destroy']);
-    Route::get('/media/{media}', [MediaController::class, 'show'])->name('media.show');
-    Route::post('/media', [MediaController::class, 'store'])->name('media.store');
-    Route::delete('/media/{media}', [MediaController::class, 'destroy'])->name('media.destroy');
-
+    Route::apiResource('/medias', MediaController::class)->only(['show', 'store', 'destroy']);
     Route::apiResource('/roles', RoleController::class);
     Route::apiResource('/skills', SkillController::class);
 
