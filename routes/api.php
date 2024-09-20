@@ -15,7 +15,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 //middleware(['auth:sanctum'])->
-Route::middleware(['auth:sanctum'])->prefix('/v1')->as('api.')->group(function () {
+Route::prefix('/v1')->as('api.')->group(function () {
     Route::apiResource('/applicants', ApplicantController::class);
     Route::post('/applicants/{applicant}/skills/{skill}', [ApplicantSkillController::class, 'store'])->name('applicants.skills.store');
     Route::delete('/applicants/{applicant}/skills/{skill}', [ApplicantSkillController::class, 'destroy'])->name('applicants.skills.destroy');
