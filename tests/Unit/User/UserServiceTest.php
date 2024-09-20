@@ -3,11 +3,14 @@
 use App\Models\Role;
 use App\Models\User;
 use App\Services\UserService;
-use Spatie\Permission\Models\Role as BaseRole;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Hash;
 
 it('create a new user', function () {
     $response = (new UserService())->create([
-
+        'name' => 'Test User',
+        'email' => 'testing@mail.com',
+        'password' => Hash::make('password'),
        ]);
 
     $this->assertTrue($response instanceof User);
@@ -24,7 +27,9 @@ it('update a user', function () {
     $response = (new UserService())->update(
         User::factory()->create(),
         [
-
+            'name' => 'Test name updated',
+            'email' => 'newmail@mail.com',
+            'password' => Hash::make('password'),
         ]
     );
 
