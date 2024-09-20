@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id' => $this->name,
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at,
-            'roles' => $this->getRoleNames() ?? [],
+            'roles' => RoleResource::collection($this->roles),
         ];
     }
 }
