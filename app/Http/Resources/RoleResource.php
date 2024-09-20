@@ -15,8 +15,8 @@ class RoleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            $this->name,
-            $this->guard_name,
+            'name' => $this->name,
+            'guard_name' => $this->guard_name,
         ];
     }
 }
