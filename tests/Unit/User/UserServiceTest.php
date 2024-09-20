@@ -5,6 +5,44 @@ use App\Models\User;
 use App\Services\UserService;
 use Spatie\Permission\Models\Role as BaseRole;
 
+it('create a new user', function () {
+    $response = (new UserService())->create([
+
+       ]);
+
+    $this->assertTrue($response instanceof User);
+});
+
+it('retrieve user', function () {
+
+    $response = (new UserService())->show(User::factory()->create());
+
+    $this->assertTrue($response instanceof User);
+});
+
+it('update a user', function () {
+    $response = (new UserService())->update(
+        User::factory()->create(),
+        [
+
+        ]
+    );
+
+    $this->assertTrue($response);
+});
+
+it('delete a user', function () {
+    $response = (new UserService())->delete(User::factory()->create());
+
+    $this->assertTrue($response);
+});
+
+it('list users', function () {
+    $response = (new UserService())->list();
+
+    $this->assertTrue($response instanceof LengthAwarePaginator);
+});
+
 it('can add a single role to user', function () {
     $user = User::factory()->create();
     $role = Role::factory()->create();
