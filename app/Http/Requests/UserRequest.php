@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Enum\ApplicantStatusEnum;
-use App\Models\Applicant;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
-class ApplicantRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,49 +25,43 @@ class ApplicantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => ['required', 'string'],
-            'last_name' => ['required', 'string'],
-            'address' => ['nullable', 'string'],
-            'city' => ['nullable', 'string'],
-            'state' => ['nullable', 'string'],
-            'country' => ['nullable', 'string'],
-            'status' => ['nullable', Rule::enum(ApplicantStatusEnum::class)],
+            'name' => ['required', 'string'],
         ] + ($this->isMethod('post') ? $this->store() : $this->update());
     }
 
     public function store(): array
     {
         return[
-                'email' => ['required', 'string', 'email', 'unique:'.Applicant::class],
-                'password' => ['required', 'confirmed',
-                    Password::min(8)
+            'email' => ['required', 'string', 'email', 'unique:'.User::class],
+            'password' => ['required', 'confirmed',
+                Password::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
                     ->uncompromised()],
-                'password_confirmation' => ['required',
-                    Password::min(8)
+            'password_confirmation' => ['required',
+                Password::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
                     ->uncompromised()
-                ],
+            ],
         ];
     }
 
     public function update(): array
     {
-        $applicant = $this->route('applicant');
+        $user = $this->route('user');
 
         return[
-                'email' => [
-                    'required',
-                    'string',
-                    'email',
-                    Rule::unique('applicants')->ignore($applicant)
-                ],
-            ];
+            'email' => [
+                'required',
+                'string',
+                'email',
+                Rule::unique('users')->ignore($user)
+            ],
+        ];
     }
 }
