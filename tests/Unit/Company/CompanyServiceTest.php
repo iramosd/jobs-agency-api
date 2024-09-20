@@ -7,7 +7,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 it('create a new company', function () {
     $response = (new CompanyService())->create([
-
+        'name' => fake()->company(),
+        'address' => fake()->address(),
+        'phone' => fake()->phoneNumber(),
+        'email' => fake()->email(),
     ]);
 
     $this->assertTrue($response instanceof Company);
@@ -24,7 +27,8 @@ it('update a company', function () {
     $response = (new CompanyService())->update(
         Company::factory()->create(),
         [
-
+            'name' => fake()->company(),
+            'address' => fake()->address(),
         ]
     );
 
@@ -38,6 +42,7 @@ it('delete a company', function () {
 });
 
 it('list company', function () {
+    Company::factory(15)->create();
     $response = (new CompanyService())->list();
 
     $this->assertTrue($response instanceof LengthAwarePaginator);
