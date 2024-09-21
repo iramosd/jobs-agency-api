@@ -8,9 +8,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobPosition>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Job>
  */
-class JobPositionFactory extends Factory
+class JobFactory extends Factory
 {
     /**
      * Define the model's default state.
