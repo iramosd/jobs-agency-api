@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('jobs_applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('job_id');
+            $table->foreign('job_id')->references('id')->on('jobs_positions');
             $table->foreignId('applicant_id');
             $table->string('state')->default(ApplicationStatusEnum::IN_PROGRESS->value);
             $table->text('note')->nullable();
