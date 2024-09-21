@@ -26,6 +26,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'company_id' => ['nullable', 'numeric'],
         ] + ($this->isMethod('post') ? $this->store() : $this->update());
     }
 

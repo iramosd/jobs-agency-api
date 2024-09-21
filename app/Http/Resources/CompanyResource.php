@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class CompanyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +17,9 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'address' => $this->address,
+            'phone' => $this->phone,
             'email' => $this->email,
-            'email_verified_at' => $this->email_verified_at,
-            'roles' => count($this->roles) > 0 ? RoleResource::collection($this->roles) : null,
-            'company' => new CompanyResource($this->company),
         ];
     }
 }

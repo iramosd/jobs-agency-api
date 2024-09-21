@@ -28,5 +28,9 @@ class UserSeeder extends Seeder
         foreach($users as $user) {
             User::create($user);
         }
+
+        if(config('app.env') === 'local' || config('app.env') === 'testing') {
+            User::factory(15)->create();
+        }
     }
 }

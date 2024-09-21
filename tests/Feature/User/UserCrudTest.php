@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\User;
 
 it('Check for list all users endpoint', function () {
@@ -16,6 +17,7 @@ it('Check endpoint for create new user', function () {
             'email' => fake()->unique()->safeEmail(),
             'password' => $password,
             'password_confirmation' => $password,
+            'company_id' => null,
         ])->assertStatus(201);
 });
 
@@ -33,6 +35,7 @@ it('Check endpoint for update user', function () {
     $this->actingAs(User::factory()->create())->patch('/api/v1/users/'.User::factory()->create()->id, [
         'name' => fake()->name(),
         'email' => fake()->unique()->safeEmail(),
+        'company_id' => Company::factory()->create()->id,
     ])->assertOk();
 });
 
