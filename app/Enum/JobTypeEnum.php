@@ -9,4 +9,9 @@ enum JobTypeEnum: string
     case CONTRACT = 'contract';
     case TEMPORARY = 'temporary';
     case INTERNSHIP = 'internship';
+
+    static function getValues(): array
+    {
+        return array_map(fn($type) => $type->value, JobTypeEnum::cases());
+    }
 }
