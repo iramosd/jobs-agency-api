@@ -1,13 +1,18 @@
 <?php
 
+use App\Enum\ApplicationStatusEnum;
+use App\Models\Applicant;
+use App\Models\Job;
 use App\Models\JobApplication;
-use App\Models\User;
 use App\Services\JobApplicationService;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 it('create a new job application', function () {
     $response = (new JobApplicationService)->create([
-
+        'job_id' => Job::factory()->create()->id,
+        'applicant_id' => Applicant::factory()->create()->id,
+        'state' => fake()->randomElement(ApplicationStatusEnum::getValues()),
+        'note' => fake()->text(),
     ]);
 
     $this->assertTrue($response instanceof JobApplication);
@@ -24,7 +29,8 @@ it('update a job application', function () {
     $response = (new JobApplicationService())->update(
         JobApplication::factory()->create(),
         [
-
+            'state' => fake()->randomElement(ApplicationStatusEnum::getValues()),
+            'note' => fake()->text(),
         ]
     );
 
