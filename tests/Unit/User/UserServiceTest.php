@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\UserService;
@@ -27,13 +28,27 @@ it('update a user', function () {
     $response = (new UserService())->update(
         User::factory()->create(),
         [
-            'name' => 'Test name updated',
-            'email' => 'newmail@mail.com',
+            'name' => fake()->name(),
+            'email' => fake()->unique()->email(),
             'password' => Hash::make('password'),
+            'company_id' => Company::factory()->create()->id,
         ]
     );
 
     $this->assertTrue($response);
+
+    $response = (new UserService())->update(
+        User::factory()->create(),
+        [
+            'name' => fake()->name(),
+            'email' => fake()->unique()->email(),
+            'password' => Hash::make('password'),
+            'company_id' => null,
+        ]
+    );
+
+    $this->assertTrue($response);
+
 });
 
 it('delete a user', function () {
