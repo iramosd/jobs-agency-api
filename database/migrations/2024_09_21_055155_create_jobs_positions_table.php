@@ -1,7 +1,7 @@
 <?php
 
 use App\Enum\JobTypeEnum;
-use App\Enum\WorkModalityEnum;
+use App\Enum\JobModalityEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description');
-            $table->string('modality')->default(WorkModalityEnum::ONSITE->value);
+            $table->string('modality')->default(JobModalityEnum::ONSITE->value);
             $table->string('location')->nullable();
             $table->string('type')->default(JobTypeEnum::FULL_TIME->value);
             $table->float('min_salary', 2)->nullable();

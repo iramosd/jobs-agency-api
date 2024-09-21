@@ -19,18 +19,18 @@ class JobService implements JobServiceInterface
         return Job::create($data);
     }
 
-    public function update(Job $jobPosition, array $data): bool
+    public function update(Job $job, array $data): bool
     {
-        return $jobPosition->update($data);
+        return $job->update($data);
     }
 
-    public function delete(Job $jobPosition): bool
+    public function delete(Job $job): bool
     {
-        return $jobPosition->delete();
+        return $job->delete();
     }
 
-    public function show(Job $jobPosition): ?Job
+    public function show(Job $job): ?Job
     {
-        return $jobPosition;
+        return $job;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Enum;
 
-enum WorkModalityEnum: string
+enum JobModalityEnum: string
 {
     case ONSITE = 'onsite';
     case HIBRID = 'hibrid';
@@ -11,7 +11,7 @@ enum WorkModalityEnum: string
 
     static function getValues(): array
     {
-        return array_map(fn($modality) => $modality->value, WorkModalityEnum::cases());
+        return array_map(fn($modality) => $modality->value, JobModalityEnum::cases());
     }
 
 }

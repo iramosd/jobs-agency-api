@@ -1,6 +1,7 @@
 <?php
 
-use App\Enum\WorkModalityEnum;
+use App\Enum\JobModalityEnum;
+use App\Enum\JobTypeEnum;
 use App\Models\Job;
 use App\Models\User;
 use App\Services\JobService;
@@ -27,9 +28,9 @@ it('update a job position', function () {
     $response = (new JobService())->update(
         Job::factory()->create(),
         [
-            'modality' => WorkModalityEnum::HIBRID,
+            'modality' => JobModalityEnum::HIBRID,
             'location' => fake()->country(),
-            'type' => \App\Enum\JobTypeEnum::TEMPORARY,
+            'type' => JobTypeEnum::TEMPORARY,
         ]
     );
 

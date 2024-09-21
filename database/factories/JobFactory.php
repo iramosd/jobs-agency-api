@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Enum\JobTypeEnum;
-use App\Enum\WorkModalityEnum;
+use App\Enum\JobModalityEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +22,7 @@ class JobFactory extends Factory
         return [
             'title' => fake()->title,
             'description' => fake()->realText(),
-            'modality' => fake()->randomElement(WorkModalityEnum::getValues()),
+            'modality' => fake()->randomElement(JobModalityEnum::getValues()),
             'location' => fake()->country(),
             'type' => fake()->randomElement(JobTypeEnum::getValues()),
             'min_salary' => fake()->numberBetween(0, 1000),
