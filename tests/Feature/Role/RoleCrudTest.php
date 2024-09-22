@@ -57,5 +57,3 @@ it('check endpoint for failed delete role', function () {
     $this->actingAs(User::factory()->create())->delete('/api/v1/roles/1555151515151515151515151515')
         ->assertStatus(404);
 });
-
-
