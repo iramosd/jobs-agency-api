@@ -25,7 +25,7 @@ Route::prefix('/v1')->as('api.')->group(function () {
 
     Route::apiResource('/companies', CompanyController::class);
     Route::apiResource('/jobs', JobController::class);
-    Route::apiResource('/jobs/{job}/application', JobApplicationController::class);
+    Route::apiResource('/jobs/{job}/applications', JobApplicationController::class);
     Route::apiResource('/medias', MediaController::class)->only(['show', 'store', 'destroy']);
     Route::apiResource('/roles', RoleController::class);
     Route::apiResource('/skills', SkillController::class);
