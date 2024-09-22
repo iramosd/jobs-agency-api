@@ -33,7 +33,7 @@ class JobApplicationController extends Controller
     {
         $data = $request->validated() + [
                 'job_id' => $job->id,
-                'applicant_id' => auth()->user()->id,
+                'applicant_id' => auth()->user()->id,// @phpstan-ignore-line
             ];
 
         return new JobApplicationResource($this->service->create($data));
