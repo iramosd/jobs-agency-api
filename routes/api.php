@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\v1\ApplicantController;
 use App\Http\Controllers\api\v1\ApplicantSkillController;
 use App\Http\Controllers\api\v1\CompanyController;
+use App\Http\Controllers\api\v1\JobApplicationController;
 use App\Http\Controllers\api\v1\JobController;
 use App\Http\Controllers\api\v1\MediaController;
 use App\Http\Controllers\api\v1\RoleController;
@@ -24,6 +25,7 @@ Route::prefix('/v1')->as('api.')->group(function () {
 
     Route::apiResource('/companies', CompanyController::class);
     Route::apiResource('/jobs', JobController::class);
+    Route::apiResource('/jobs/{job}/application', JobApplicationController::class);
     Route::apiResource('/medias', MediaController::class)->only(['show', 'store', 'destroy']);
     Route::apiResource('/roles', RoleController::class);
     Route::apiResource('/skills', SkillController::class);
