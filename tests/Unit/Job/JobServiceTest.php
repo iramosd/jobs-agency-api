@@ -4,6 +4,7 @@ use App\Enum\JobModalityEnum;
 use App\Enum\JobTypeEnum;
 use App\Models\Job;
 use App\Models\JobSkill;
+use App\Models\Skill;
 use App\Models\User;
 use App\Services\JobService;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -53,7 +54,7 @@ it('list jobs positions', function () {
 it('add a skill to job', function () {
     $response = (new JobService())->addSkill(Job::factory()->create(), Skill::factory()->create());
 
-    $this->assertTrue($response instanceof JobSkill);
+    $this->assertTrue($response);
 });
 
 it('remove a skill to job', function () {
