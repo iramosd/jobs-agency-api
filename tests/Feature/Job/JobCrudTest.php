@@ -3,6 +3,7 @@
 use App\Enum\JobModalityEnum;
 use App\Enum\JobTypeEnum;
 use App\Models\Job;
+use App\Models\Skill;
 use App\Models\User;
 
 it('check to list all jobs', function () {
@@ -67,4 +68,22 @@ it('check endpoint for delete job', function () {
 it('check endpoint for failed delete job', function () {
     $this->actingAs(User::factory()->create())->delete('/api/v1/jobs/1555151515151515151515151515')
         ->assertStatus(404);
+});
+
+it('Check endpoint for add skill to job', function () {
+    $this->actingAs(User::factory()->create())->post(
+        '/api/v1/jobs/'.Job::factory()->create()->id.'/skills/'.Skill::factory()->create()->id
+    )->assertStatus(201);
+});
+
+it('remove skill to job', function () {
+    $job = Job::factory()->create();
+    $skill = Skill::factory()->create();
+    $this->actingAs(User::factory()->create())->post(
+        '/api/v1/jobs/'.$job->id.'/skills/'.$skill->id,
+    )->assertStatus(201);
+
+    $this->actingAs(User::factory()->create())->delete(
+        '/api/v1/jobs/'.$job->id.'/skills/'.$skill->id,
+    )->assertStatus(204);
 });

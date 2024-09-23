@@ -23,6 +23,7 @@ class JobResource extends JsonResource
             'min_salary' => $this->min_salary,
             'max_salary' => $this->max_salary,
             'user_id' => $this->user_id,
+            'skills' => count($this->skills) > 0 ? SkillResource::collection($this->skills) : null,
         ];
     }
 }
