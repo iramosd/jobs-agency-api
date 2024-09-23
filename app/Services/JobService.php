@@ -36,6 +36,7 @@ class JobService implements JobServiceInterface
         return $job;
     }
 
+    // TODO Improve return type, verify if skill was added successfully
     public function addSkill(Job $job, Skill $skill): bool
     {
         return is_null( $job->skills()->attach($skill) );
