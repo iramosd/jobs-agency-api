@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Contracts\JobServiceInterface;
 use App\Models\Job;
+use App\Models\JobSkill;
+use App\Models\Skill;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class JobService implements JobServiceInterface
@@ -32,5 +34,16 @@ class JobService implements JobServiceInterface
     public function show(Job $job): ?Job
     {
         return $job;
+    }
+
+    // TODO Improve return type, verify if skill was added successfully
+    public function addSkill(Job $job, Skill $skill): bool
+    {
+        return is_null( $job->skills()->attach($skill) );
+    }
+
+    public function removeSkill(Job $job, Skill $skill): bool
+    {
+        return (boolean)$job->skills()->detach($skill);
     }
 }
