@@ -28,7 +28,7 @@ class JobSkillController extends Controller
 
         return (new JobResource($job))
             ->response()
-            ->setStatusCode(201);;
+            ->setStatusCode(201);
     }
 
     /**
