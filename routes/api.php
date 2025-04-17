@@ -11,7 +11,6 @@ use App\Http\Controllers\api\v1\RoleController;
 use App\Http\Controllers\api\v1\SkillController;
 use App\Http\Controllers\api\v1\UserController;
 use App\Http\Controllers\api\v1\UserRoleController;
-use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,4 +38,3 @@ Route::prefix('/v1')->as('api.')->group(function () {
     Route::delete('/users/{user}/roles/{role}', [UserRoleController::class, 'destroy'])->name('users.roles.destroy');
 
 });
-
