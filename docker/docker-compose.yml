@@ -1,0 +1,42 @@
+services:
+  mysql:
+    image: docker.io/bitnami/mysql:8.4
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mysql_data:/bitnami/mysql/data'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+  php:
+    build:
+      context: .
+      dockerfile: PhpDockerfile
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: "sh -c '/usr/local/bin/php-setup-project.sh'"
+    ports:
+      - '8000:8000'
+    volumes:
+      - './jobs-agency-api:/var/www/html:z'
+  #node:
+  #  build:
+  #    context: .
+  #    dockerfile: NodeDockerfile
+  #  command: "sh -c '/usr/local/bin/node-setup-project.sh'"
+  #  ports:
+  #    - '5173:5173'
+  #  volumes:
+  #    - '.:/app'
+networks:
+  default:
+    name: job_agency_network
+    
+volumes:
+  mysql_data:
+    driver: local
