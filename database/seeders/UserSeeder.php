@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'name' => 'Ismael Ramos',
                 'email' => 'iramosdev@hotmail.com',
                 'email_verified_at' => now(),
-                'password' => Hash::make('Jobs2024!'),
+                'password' => Hash::make('Jobs2025!'),
                 'remember_token' => Str::random(10),
             ]
         ];
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
         }
 
         if(config('app.env') === 'local' || config('app.env') === 'testing') {
-            User::factory(15)->create();
+            User::factory(40)->create();
         }
     }
 }

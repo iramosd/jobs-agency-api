@@ -13,6 +13,6 @@ class ApplicantSeeder extends Seeder
      */
     public function run(): void
     {
-        Applicant::factory(15)->create();
+        Applicant::factory(200)->create();
     }
 }
