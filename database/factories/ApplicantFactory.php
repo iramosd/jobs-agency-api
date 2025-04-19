@@ -28,7 +28,7 @@ class ApplicantFactory extends Factory
             'city' => fake()->city(),
             'state' => fake()->state(),
             'country' => fake()->country(),
-            'status' => fake()->randomElement([ApplicantStatusEnum::ACTIVE->value, ApplicantStatusEnum::INACTIVE->value]),
+            'status' => fake()->randomElement(ApplicantStatusEnum::getValues()),
         ];
     }
 }

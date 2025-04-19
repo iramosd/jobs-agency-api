@@ -9,4 +9,9 @@ enum SkillLevelEnum: string
     case ADVANCED = 'advanced';
     case EXPERT = 'expert';
 
+    static function getValues(): array
+    {
+        return array_map(fn($level) => $level->value, SkillLevelEnum::cases());
+    }
+
 }
